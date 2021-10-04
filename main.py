@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 import yfinance as yf
 import pandas as pd
 import time
-import random
 import numpy as np
 
 # .envファイルを探して読み込む
