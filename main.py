@@ -67,22 +67,25 @@ def graph(start_date,end_date,num):
     return text
 
 today = datetime.date.today()
-start = '2021-' + str(today.month -1 ) + '-1'
+start = '2021-' + str(today.month ) + '-1'
 text = graph(start, str(today.year) + '-12-31',str(1))
 
 file_names = ['img1.png']
 media_ids = []
 
-for filename in file_names:
-    res = api.media_upload(filename)
-    media_ids.append(res.media_id)
-print(media_ids)
+def tweet(file_names,Tickers):
+    for filename in file_names:
+        res = api.media_upload(filename)
+        media_ids.append(res.media_id)
+    print(media_ids)
 
-tag = ''
-for name,ticker in Tickers.items():
-    tag = tag + '#' + ticker + ' '
+    tag = ''
+    for name,ticker in Tickers.items():
+        tag = tag + '#' + ticker + ' '
 
-api.update_status(
-    status= 'セクター別パファーマンス'+ '(' + start + '~' + ')' +  '\n' + text + tag,
-    media_ids= media_ids,
-)
+    api.update_status(
+        status= 'セクター別パファーマンス'+ '(' + start + '~' + ')' +  '\n' + text + tag,
+        media_ids= media_ids,
+    )
+
+tweet(file_names,Tickers)
